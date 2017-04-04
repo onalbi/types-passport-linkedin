@@ -1,0 +1,25 @@
+{
+  "authors": "Albion Liçi <https://github.com/onalbi>",
+  "libraryDependencies": [
+    "passport"
+  ],
+  "moduleDependencies": [
+    "express",
+    "passport"
+  ],
+  "libraryMajorVersion": 1,
+  "libraryMinorVersion": 0,
+  "libraryName": "passport-linkedin",
+  "typingsPackageName": "passport-linkedin",
+  "projectName": "https://github.com/onalbi/passport-linkedin",
+  "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+  "sourceBranch": "types-2.0",
+  "globals": [],
+  "declaredModules": [
+    "passport-linkedin"
+  ],
+  "files": [
+    "index.d.ts"
+  ],
+  "hasPackageJson": false
+}
