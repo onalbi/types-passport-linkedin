@@ -10,6 +10,9 @@ import passport = require('passport');
 import express = require('express');
 
 interface Profile extends passport.Profile {
+    id: any;
+    emails: any;
+    provider: any;
     _raw: string;
     _json: any;
 }
