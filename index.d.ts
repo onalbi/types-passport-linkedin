@@ -10,12 +10,12 @@ import passport = require('passport');
 import express = require('express');
 
 interface Profile extends passport.Profile {
-    gender: string;
-    username: string;
-
     _raw: string;
     _json: any;
-    _accessLevel: string;
+}
+
+export interface AuthenticateOptions extends passport.AuthenticateOptions {
+    authType?: string;
 }
 
 interface IStrategyOption {
@@ -23,21 +23,28 @@ interface IStrategyOption {
     consumerSecret: string;
     callbackURL: string;
 
-    passReqToCallback?: true;
-    includeEmail?: true;
+    profileFields?: string[];
+}
 
-    reguestTokenURL?: string;
-    accessTokenURL?: string;
-    userAuthorizationURL?: string;
-    sessionKey?: string;
+interface IStrategyOptionWithRequest {
+    consumerKey: string;
+    consumerSecret: string;
+    callbackURL: string;
 
-    userProfileURL?: string;
-    skipExtendedUserProfile?: boolean;
+    profileFields?: string[];
+}
+
+interface VerifyFunction {
+    (accessToken: string, refreshToken: string, profile: Profile, done: (error: any, user?: any, info?: any) => void): void;
+}
+
+interface VerifyFunctionWithRequest {
+    (req: express.Request, accessToken: string, refreshToken: string, profile: Profile, done: (error: any, user?: any, info?: any) => void): void;
 }
 
 declare class Strategy implements passport.Strategy {
-    constructor(options: IStrategyOption,
-                verify: (accessToken: string, refreshToken: string, profile: Profile, done: (error: any, user?: any) => void) => void);
+    constructor(options: IStrategyOptionWithRequest, verify: VerifyFunctionWithRequest);
+    constructor(options: IStrategyOption, verify: VerifyFunction);
 
     name: string;
     authenticate: (req: express.Request, options?: Object) => void;
